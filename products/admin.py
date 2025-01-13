@@ -5,7 +5,7 @@ from mptt.admin import MPTTModelAdmin
 # Register your models here.
 @admin.register(Category)
 class CategoryAdmin(MPTTModelAdmin):
-    list_display = ('title', 'parent', 'tree_id', 'lft', 'rght', 'level')
+    list_display = ('title', 'parent', 'tree_id', 'lft', 'rght', 'level' , 'slug')
     list_filter = ('parent',)
     search_fields = ('title',)
 

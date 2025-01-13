@@ -14,14 +14,14 @@
             <ul>
                 {% for category in categories %}
                     <li>
-                        <a href="{% url 'product_list' category.slug %}">{{ category.title }}</a>
+                        <a href="">{{ category.title }}</a>
                         <ul class="row">
                             <li class="col-3">
-                                <a href="{% url 'product_list' category.slug %}">{{ category.title }}</a>
+                                <a href="">{{ category.title }}</a>
                                 <ul>
-                                    {% for sub_category in category.children.all %}
+                                    {% for sub_category in category.get_children %}
                                         <li>
-                                            <a href="{% url 'product_list' sub_category.slug %}">{{ sub_category.title }}</a>
+                                            <a href="{% url 'product_list' sub_category.id %}">{{ sub_category.title }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>

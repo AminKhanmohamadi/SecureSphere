@@ -1,3 +1,4 @@
+from pydoc import parentname
 from unicodedata import category
 
 from django.shortcuts import render
@@ -16,5 +17,5 @@ class HomePageView(TemplateView):
 
 class CategoryPartials(View):
     def get(self, request, *args, **kwargs):
-        categories = Category.objects.all()
+        categories = Category.objects.filter(parent__isnull=True)
         return render(request , 'core/partials/category_partial.html' , {'categories': categories})
