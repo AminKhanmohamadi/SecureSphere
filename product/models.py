@@ -28,8 +28,8 @@ class ProductAttribute(models.Model):
 
 
 class ProductRecommendation(models.Model):
-    primary = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='primary_recommendations')
-    recommendation = models.ForeignKey(Product, on_delete=models.CASCADE)
+    primary = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='primary_recommendations')
+    recommendation = models.ForeignKey('Product', on_delete=models.CASCADE)
     rank = models.PositiveIntegerField(default=0)
 
 
