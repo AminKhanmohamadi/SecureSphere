@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load static %}
 {% load humanize %}
 {% block main_content %}
     <main class="main-content dt-sl mb-3">
@@ -24,7 +25,7 @@
                                     <input type="text" name="s"
                                            placeholder="نام محصول یا برند مورد نظر را بنویسید...">
                                     <button class="btn-search-widget">
-                                        <img src="assets/img/theme/search.png" alt="">
+                                        <img src="{% static 'assets/img/theme/search.png' %}" alt="">
                                     </button>
                                 </div>
                             </div>
@@ -44,42 +45,13 @@
                                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck1">
-                                                    <label class="custom-control-label"
-                                                           for="customCheck1">همه</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck2">
-                                                    <label class="custom-control-label" for="customCheck2">لباس
-                                                        مردانه</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck3">
-                                                    <label class="custom-control-label" for="customCheck3">تیشرت
-                                                        مردانه</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck4">
-                                                    <label class="custom-control-label" for="customCheck4">شلوار
-                                                        مردانه</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck5">
-                                                    <label class="custom-control-label" for="customCheck5">لباس
-                                                        زنانه</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck6">
-                                                    <label class="custom-control-label"
-                                                           for="customCheck6">اکسسوری</label>
-                                                </div>
+                                                {% for category in categories %}
+                                                    <div class="custom-control">
+                                                        <a href="{% url 'product_list' category.id %}" class="btn btn-category">
+                                                            {{ category.title }}
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
@@ -124,98 +96,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                            <h2 class="mb-0">
-                                                <button class="btn btn-block text-right collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                        aria-expanded="false" aria-controls="collapseThree">
-                                                    فروشنده
-                                                    <i class="fad fa-chevron-down"></i>
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                             data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck11">
-                                                    <label class="custom-control-label"
-                                                           for="customCheck11">همه</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck12">
-                                                    <label class="custom-control-label" for="customCheck12">دیجی پرس
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck13">
-                                                    <label class="custom-control-label" for="customCheck13">فروشنده
-                                                        رسمی برند</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingFour">
-                                            <h2 class="mb-0">
-                                                <button class="btn btn-block text-right collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                                        aria-expanded="false" aria-controls="collapseFour">
-                                                    رنگها
-                                                    <i class="fad fa-chevron-down"></i>
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-                                             data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck14">
-                                                    <label class="custom-control-label"
-                                                           for="customCheck14">مشکی</label>
-                                                    <span class="filter-color"
-                                                          style="background-color: rgb(0,0,0)"></span>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck15">
-                                                    <label class="custom-control-label" for="customCheck15">نوک
-                                                        مدادی</label>
-                                                    <span class="filter-color"
-                                                          style="background-color: rgb(105,105,105)"></span>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck16">
-                                                    <label class="custom-control-label" for="customCheck16">آبی
-                                                        روشن</label>
-                                                    <span class="filter-color"
-                                                          style="background-color: rgb(64,170,255)"></span>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck17">
-                                                    <label class="custom-control-label" for="customCheck17">نقره
-                                                        ای</label>
-                                                    <span class="filter-color"
-                                                          style="background-color: rgb(222,222,222)"></span>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                           id="customCheck18">
-                                                    <label class="custom-control-label"
-                                                           for="customCheck18">زرد</label>
-                                                    <span class="filter-color"
-                                                          style="background-color: rgb(255,255,0)"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-4">
@@ -250,6 +130,8 @@
                     </div>
                 </div>
                 <!-- End Sidebar -->
+
+
                 <!-- Start Content -->
                 <div class="col-lg-9 col-md-12 col-sm-12 search-card-res mt-3">
                     <div class="d-md-none">
@@ -257,84 +139,137 @@
                             جستجوی پیشرفته <i class="fad fa-sliders-h"></i>
                         </button>
                     </div>
+
                     <div class="dt-sl dt-sn px-0 search-amazing-tab">
-                        <div class="ah-tab-wrapper dt-sl">
-                            <div class="ah-tab dt-sl">
-                                <a class="ah-tab-item" data-ah-tab-active="true" href="">مرتبط ترین</a>
-                                <a class="ah-tab-item" href="">پربازدید ترین</a>
-                                <a class="ah-tab-item" href="">جدید ترین</a>
-                                <a class="ah-tab-item" href="">پرفروش ترین</a>
-                                <a class="ah-tab-item" href="">ارزان ترین</a>
-                                <a class="ah-tab-item" href="">گران ترین</a>
-                            </div>
+                        <div class="ah-tab dt-sl">
+                            <button
+                                    class="sort-button ah-tab-item"
+                                    data-sort="newest"
+                                    data-ah-tab-active="true"
+                            >
+                                جدیدترین
+                            </button>
+                            <button class="sort-button ah-tab-item" data-sort="price_asc">
+                                ارزان‌ترین
+                            </button>
+                            <button class="sort-button ah-tab-item" data-sort="price_desc">
+                                گران‌ترین
+                            </button>
                         </div>
+
                         <div class="ah-tab-content-wrapper dt-sl px-res-0">
                             <div class="ah-tab-content dt-sl" data-ah-tab-active="true">
-                                <div class="row mb-3 mx-0 px-res-0">
+                                <div class="row mb-3 mx-0 px-res-0" id="product-list">
                                     {% for product in products %}
-                                        {% if product.offer %}
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-12 px-10 mb-1 px-res-0">
-                                                <div class="product-card mb-2 mx-res-0">
-                                                    <div class="promotion-badge">
-                                                        فروش ویژه
-                                                    </div>
-                                                    <a class="product-thumb" href="#">
-                                                        <img src="{{ product.main_image.image.url }}" alt="Product Thumbnail">
-                                                    </a>
-                                                    <div class="product-card-body">
-                                                        <h5 class="product-title">
-                                                            <a href="#">{{ product.title }}</a>
-                                                        </h5>
-                                                        <a class="product-meta" href="shop-categories.html">{{ product.category }}</a>
-                                                        <span class="product-price">{{ product.off_price|intcomma:False }} تومان</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% else %}
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-12 px-10 mb-1 px-res-0">
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 px-10 mb-1 px-res-0">
                                             <div class="product-card mb-2 mx-res-0">
-                                                <a class="product-thumb" href="#">
-                                                    <img src="{{ product.main_image.image.url }}" alt="Product Thumbnail">
+                                                {% if product.offer %}
+                                                    <div class="promotion-badge">فروش ویژه</div>
+                                                    <div class="product-head">
+                                                        <div class="rating-stars">
+                                                            <i class="fa fa-star active"></i>
+                                                            <i class="fa fa-star active"></i>
+                                                            <i class="fa fa-star active"></i>
+                                                            <i class="fa fa-star active"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                        <div class="discount">
+                                                            <span>{{ product.offer }}%</span>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                <a class="product-thumb" href="">
+                                                    <img src="{{ product.main_image.image.url }}" alt="Product Thumbnail"/>
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
-                                                        <a href="#"> {{ product.title }}</a>
+                                                        <a href="">{{ product.title }}</a>
                                                     </h5>
-                                                    <a class="product-meta" href="shop-categories.html"> {{ product.category }}</a>
-                                                    <span class="product-price">{{ product.price|intcomma:False }} تومان</span>
+                                                    <a class="product-meta" href="{% url 'product_list' product.category.id %}">{{ product.category }}</a>
+                                                    {% if product.offer %}
+                                                        <span class="product-price" style="text-decoration: line-through; color: indianred">
+                                                            {{ product.price|intcomma:False }} تومان</span>
+                                                        <span class="product-price">{{ product.off_price|intcomma:False }} تومان</span>
+                                                    {% else %}
+                                                        <span class="product-price">{{ product.price|intcomma:False }} تومان</span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
-                                        {% endif %}
                                     {% endfor %}
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="pagination">
-                                            <a href="#" class="prev">
-                                                <i>
-                                                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path opacity="0.1" d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z" fill="#323232"></path>
-                                                        <path d="M11 15L13.7158 12.2842V12.2842C13.8728 12.1272 13.8728 11.8728 13.7158 11.7158V11.7158L11 9" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z" stroke="#323232" stroke-width="2"></path>
-                                                    </svg>
-                                                </i>
-                                            </a>
-                                            <a href="#">1</a>
-                                            <a href="#" class="active-page">2</a>
-                                            <a href="#">3</a>
-                                            <a href="#">4</a>
-                                            <a href="#">...</a>
-                                            <a href="#">7</a>
-                                            <a href="#" class="next">
-                                                <i>
-                                                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path opacity="0.1" d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z" fill="#323232"></path>
-                                                        <path d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z" stroke="#323232" stroke-width="2"></path>
-                                                        <path d="M13 9L10.2625 11.7375V11.7375C10.1175 11.8825 10.1175 12.1175 10.2625 12.2625V12.2625L13 15" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </i>
-                                            </a>
+                                            {% if page_obj.has_previous %}
+                                                <a href="?page={{ page_obj.previous_page_number }}" class="prev">
+                                                    <i>
+                                                        <svg
+                                                                width="30px"
+                                                                height="30px"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                    opacity="0.1"
+                                                                    d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z"
+                                                                    fill="#323232"
+                                                            ></path>
+                                                            <path
+                                                                    d="M11 15L13.7158 12.2842V12.2842C13.8728 12.1272 13.8728 11.8728 13.7158 11.7158V11.7158L11 9"
+                                                                    stroke="#323232"
+                                                                    stroke-width="2"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                            ></path>
+                                                            <path
+                                                                    d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z"
+                                                                    stroke="#323232"
+                                                                    stroke-width="2"
+                                                            ></path>
+                                                        </svg>
+                                                    </i>
+                                                </a>
+                                            {% endif %}
+                                            {% for num in paginator.page_range %}
+                                                {% if page_obj.number == num %}
+                                                    <a href="?page={{ num }}" class="active-page">{{ num }}</a>
+                                                {% else %}
+                                                    <a href="?page={{ num }}">{{ num }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if page_obj.has_next %}
+                                                <a href="?page={{ page_obj.next_page_number }}" class="next">
+                                                    <i>
+                                                        <svg
+                                                                width="30px"
+                                                                height="30px"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                    opacity="0.1"
+                                                                    d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z"
+                                                                    fill="#323232"
+                                                            ></path>
+                                                            <path
+                                                                    d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z"
+                                                                    stroke="#323232"
+                                                                    stroke-width="2"
+                                                            ></path>
+                                                            <path
+                                                                    d="M13 9L10.2625 11.7375V11.7375C10.1175 11.8825 10.1175 12.1175 10.2625 12.2625V12.2625L13 15"
+                                                                    stroke="#323232"
+                                                                    stroke-width="2"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                            ></path>
+                                                        </svg>
+                                                    </i>
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

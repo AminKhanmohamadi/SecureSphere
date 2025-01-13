@@ -1,21 +1,21 @@
 (function($) {
     "use strict";
     var Mihanjs = {};
-  
+
     /*----------------------------------- Preloader */
     var preloader = $(".page-loader");
     $(window).on("load", function() {
         var preloaderFadeOutTime = 500;
-  
+
         function hidePreloader() {
             preloader.fadeOut(preloaderFadeOutTime);
         }
-  
+
         hidePreloader();
     });
     /*----------------------------------- Preloader */
-  
-  
+
+
     /*-------------------------------- Sticky Header */
     Mihanjs.StickyHeader = function() {
         $(window).scroll(function() {
@@ -39,8 +39,8 @@
         });
     }
     /*-------------------------------- Sticky Header */
-  
-  
+
+
     /*-------------------------------- Category List */
     Mihanjs.CategoryList = function() {
         $('.category-list>ul>li:first-child').addClass('active');
@@ -49,8 +49,8 @@
         });
     }
     /*-------------------------------- Category List */
-  
-  
+
+
     /*----------------------------- ResponsiveHeader */
     Mihanjs.ResponsiveHeader = function() {
         $('.header-responsive .btn-toggle-side-navigation').on('click', function(event) {
@@ -68,8 +68,8 @@
         });
     }
     /*----------------------------- ResponsiveHeader */
-  
-  
+
+
     /*-------------------------------- Search Result */
     Mihanjs.SearchResult = function() {
         $('.search-box form input').on('click', function() {
@@ -94,8 +94,8 @@
         });
     }
     /*-------------------------------- Search Result */
-    
-  
+
+
     /*------------------------------------ BackToTop */
     Mihanjs.BackToTop = function() {
         $(".back-to-top .back-btn").click(function() {
@@ -106,76 +106,122 @@
         });
     }
     /*------------------------------------ BackToTop */
-  
+
     $(window).on("load", function() {});
     $(document).ready(function() {
         Mihanjs.StickyHeader(),
-        Mihanjs.CategoryList(), 
-        Mihanjs.ResponsiveHeader(), 
-        Mihanjs.SearchResult(),
-        Mihanjs.BackToTop();
-       
+            Mihanjs.CategoryList(),
+            Mihanjs.ResponsiveHeader(),
+            Mihanjs.SearchResult(),
+            Mihanjs.BackToTop();
+
     });
-  })(jQuery);
+})(jQuery);
 
 
-    $('.pointer').click(function(){
-        $("html, body").animate({ scrollTop: 0 }, 600);
-        return false;
-    });
+$('.pointer').click(function(){
+    $("html, body").animate({ scrollTop: 0 }, 600);
+    return false;
+});
 
-    /*------------------------------- Sidebar Sticky */
-    if ($(".container .sticky-sidebar").length) {
-        $(".container .sticky-sidebar").theiaStickySidebar();
+/*------------------------------- Sidebar Sticky */
+if ($(".container .sticky-sidebar").length) {
+    $(".container .sticky-sidebar").theiaStickySidebar();
+}
+/*------------------------------- Sidebar Sticky */
+
+/*----------------------- Non Linear Step Slider  */
+
+var nonLinearStepSlider = document.getElementById('slider-non-linear-step');
+noUiSlider.create(nonLinearStepSlider, {
+    start: [0, 20000],
+    connect: true,
+    direction: 'rtl',
+    format: wNumb({
+        decimals: 0,
+        thousand: ','
+    }),
+    range: {
+        'min': [0],
+        '10%': [500, 500],
+        '50%': [40000, 1000],
+        'max': [100000]
     }
-   /*------------------------------- Sidebar Sticky */
+});
+var nonLinearStepSliderValueElement = document.getElementById('slider-non-linear-step-value');
+nonLinearStepSlider.noUiSlider.on('update', function (values) {
+    nonLinearStepSliderValueElement.innerHTML = values.join(' - ');
+});
 
-   /*----------------------- Non Linear Step Slider  */
-  
-   var nonLinearStepSlider = document.getElementById('slider-non-linear-step');
-   noUiSlider.create(nonLinearStepSlider, {
-       start: [0, 20000],
-       connect: true,
-       direction: 'rtl',
-       format: wNumb({
-           decimals: 0,
-           thousand: ','
-       }),
-       range: {
-           'min': [0],
-           '10%': [500, 500],
-           '50%': [40000, 1000],
-           'max': [100000]
-       }
-   });
-   var nonLinearStepSliderValueElement = document.getElementById('slider-non-linear-step-value');
-   nonLinearStepSlider.noUiSlider.on('update', function (values) {
-       nonLinearStepSliderValueElement.innerHTML = values.join(' - ');
-   });
-  
-  /*----------------------- Non Linear Step Slider  */
-  
+/*----------------------- Non Linear Step Slider  */
 
-  /*-------------------------------- Search Sidebar */
-    $(".btn-filter-sidebar").on("click", function () {
-        $(".filter-options-sidebar").addClass("toggled");
-    });
 
-    $(".btn-close-filter-sidebar").on("click", function () {
-        $(".filter-options-sidebar").removeClass("toggled");
-    });
-  /*-------------------------------- Search Sidebar */
+/*-------------------------------- Search Sidebar */
+$(".btn-filter-sidebar").on("click", function () {
+    $(".filter-options-sidebar").addClass("toggled");
+});
 
-   /*------------------------------ Horizontal Menu */
-   $(".ah-tab-wrapper").horizontalmenu({
+$(".btn-close-filter-sidebar").on("click", function () {
+    $(".filter-options-sidebar").removeClass("toggled");
+});
+/*-------------------------------- Search Sidebar */
+
+/*------------------------------ Horizontal Menu */
+$(".ah-tab-wrapper").horizontalmenu({
     itemClick: function (item) {
-      $(".ah-tab-content-wrapper .ah-tab-content").removeAttr(
-        "data-ah-tab-active"
-      );
-      $(
-        ".ah-tab-content-wrapper .ah-tab-content:eq(" + $(item).index() + ")"
-      ).attr("data-ah-tab-active", "true");
-      return false;
+        $(".ah-tab-content-wrapper .ah-tab-content").removeAttr(
+            "data-ah-tab-active"
+        );
+        $(
+            ".ah-tab-content-wrapper .ah-tab-content:eq(" + $(item).index() + ")"
+        ).attr("data-ah-tab-active", "true");
+        return false;
     },
-   });
- /*------------------------------ Horizontal Menu */
+});
+/*------------------------------ Horizontal Menu */
+
+
+document.querySelectorAll('.sort-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const sortBy = this.getAttribute('data-sort');
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort_by', sortBy);
+
+        // AJAX request to fetch sorted products
+        fetch(url.toString(), {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // به‌روزرسانی لیست محصولات
+            document.getElementById('product-list').innerHTML = data.html;
+
+            // مدیریت تغییر دکمه‌ها
+            document.querySelectorAll('.sort-button').forEach(function (btn) {
+                btn.removeAttribute('data-ah-tab-active');  // حذف attribute برای دکمه‌های دیگر
+            });
+            this.setAttribute('data-ah-tab-active', 'true');  // اضافه کردن attribute به دکمه کلیک‌شده
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const sortButtons = document.querySelectorAll('.ah-tab-item');
+
+    sortButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            // حذف کلاس 'active' از تمامی دکمه‌ها
+            sortButtons.forEach(function (btn) {
+                btn.classList.remove('active');
+            });
+
+            // اضافه کردن کلاس 'active' به دکمه کلیک‌شده
+            this.classList.add('active');
+        });
+    });
+});
+

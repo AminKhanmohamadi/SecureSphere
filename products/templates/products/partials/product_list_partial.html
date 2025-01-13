@@ -1,0 +1,40 @@
+{% load humanize %}
+{% load static %}
+{% for product in products %}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 px-10 mb-1 px-res-0">
+        <div class="product-card mb-2 mx-res-0">
+            {% if product.offer %}
+                <div class="promotion-badge">
+                    فروش ویژه
+                </div>
+                <div class="product-head">
+                    <div class="rating-stars">
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="discount">
+                        <span>{{ product.offer }}%</span>
+                    </div>
+                </div>
+            {% endif %}
+            <a class="product-thumb" href="">
+                <img src="{{ product.main_image.image.url }}" alt="Product Thumbnail">
+            </a>
+            <div class="product-card-body">
+                <h5 class="product-title">
+                    <a href="">{{ product.title }}</a>
+                </h5>
+                <a class="product-meta" href="{% url 'product_list' product.category.id %}">{{ product.category }}</a>
+                {% if product.offer %}
+                    <span class="product-price " style="text-decoration: line-through; color: indianred;">{{ product.price|intcomma:False }} تومان</span>
+                    <span class="product-price">{{ product.off_price|intcomma:False }} تومان</span>
+                {% else %}
+                    <span class="product-price">{{ product.price|intcomma:False }} تومان</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
