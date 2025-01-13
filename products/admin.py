@@ -1,12 +1,13 @@
 from django.contrib import admin
 from .models import Category, Product, ProductAttribute, ProductRecommendation, ProductImage
-
+from mptt.admin import MPTTModelAdmin
 
 # Register your models here.
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    model = Category
-    list_display = ['title' , 'is_public']
+class CategoryAdmin(MPTTModelAdmin):
+    list_display = ('title', 'parent', 'tree_id', 'lft', 'rght', 'level')
+    list_filter = ('parent',)
+    search_fields = ('title',)
 
 
 class ProductAttributeInline(admin.TabularInline):

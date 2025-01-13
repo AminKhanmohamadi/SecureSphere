@@ -1,31 +1,39 @@
 import uuid
 from decimal import Decimal
 from django.utils.text import slugify
+from autoslug import AutoSlugField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from treebeard.mp_tree import MP_Node
+from mptt.models import MPTTModel, TreeForeignKey
 
 # Create your models here.
 
-class Category(MP_Node):
+class Category(MPTTModel):
     title = models.CharField(max_length=100 , db_index=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, db_index=True , related_name='children')
     description = models.TextField(null=True, blank=True)
     is_public = models.BooleanField(default=True)
-    slug = models.SlugField(max_length=100, unique=True , allow_unicode=True)
+    slug = models.SlugField(max_length=100, unique=True, allow_unicode=True, blank=True)
+
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
     def __str__(self):
         return self.title
 
-    class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Category, self).save(*args, **kwargs)
+
+
 
 
 
 class Product(models.Model):
     title = models.CharField(max_length=100 , db_index=True)
     description = models.TextField(null=True, blank=True)
-    slug = models.SlugField(max_length=100, unique=True , allow_unicode=True)
+    slug = AutoSlugField(populate_from='title' , unique=True , allow_unicode=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     recommendation = models.ManyToManyField('products.Product' , through='ProductRecommendation' , blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=0)
