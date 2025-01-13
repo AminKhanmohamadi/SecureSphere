@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'treebeard',
     'core.apps.CoreConfig',
-    'product.apps.ProductConfig',
+    'products.apps.ProductsConfig',
     'accounts.apps.AccountsConfig'
 ]
 
